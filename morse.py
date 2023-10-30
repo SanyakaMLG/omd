@@ -1,4 +1,6 @@
 """Morse Code Translator"""
+import pytest
+
 
 LETTER_TO_MORSE = {
     'A': '.-', 'B': '-...', 'C': '-.-.',
@@ -52,6 +54,19 @@ def decode(morse_message: str) -> str:
     ]
 
     return ''.join(decoded_letters)
+
+
+@pytest.mark.parametrize(
+    'morse_msg, msg',
+    [
+        ('... --- ...', 'SOS'),
+        ('.... . .-.. .-.. ---', 'HELLO'),
+        ('.- .- .-', 'AAA'),
+        ('-.--. -.--.-', '()')
+    ]
+)
+def test_decode_message(morse_msg, msg):
+    assert decode(morse_msg) == msg
 
 
 if __name__ == '__main__':
