@@ -1,0 +1,94 @@
+python -m doctest -v -o NORMALIZE_WHITESPACE morse.py
+
+Trying:
+    encode('SOS')
+Expecting:
+    '... ---   ...'
+ok
+Trying:
+    encode('HELLO')
+Expecting:
+    '.... . .-.. .-.. ---'
+ok
+Trying:
+    encode(123) # doctest: +IGNORE_EXCEPTION_DETAIL
+Expecting:
+    Traceback (most recent call last):
+    TypeError: 'int' object is not iterable
+ok
+3 items had no tests:
+    morse
+    morse.decode
+    morse.test_decode_message
+1 items passed all tests:
+   3 tests in morse.encode
+3 tests in 4 items.
+3 passed and 0 failed.
+Test passed.
+
+
+
+python -m pytest -v morse.py
+
+================================================================================= test session starts =================================================================================
+platform win32 -- Python 3.11.4, pytest-7.4.0, pluggy-1.0.0 -- C:\Users\aleks\anaconda3\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\aleks\Desktop\omd
+plugins: anyio-3.5.0, cov-4.1.0
+collected 4 items
+
+morse.py::test_decode_message[... --- ...-SOS] PASSED                                                                                                                            [ 25%]
+morse.py::test_decode_message[.... . .-.. .-.. ----HELLO] PASSED                                                                                                                 [ 50%]
+morse.py::test_decode_message[.- .- .--AAA] PASSED                                                                                                                               [ 75%]
+morse.py::test_decode_message[-.--. -.--.--()] PASSED                                                                                                                            [100%]
+
+================================================================================== 4 passed in 0.02s ==================================================================================
+
+
+
+python -m unittest -v test_one_hot_encoder.py
+
+test_empty_fit_transform (test_one_hot_encoder.TestFitTransform.test_empty_fit_transform) ... ok
+test_fit_transform_equal (test_one_hot_encoder.TestFitTransform.test_fit_transform_equal) ... ok
+test_fit_transform_in (test_one_hot_encoder.TestFitTransform.test_fit_transform_in) ... ok
+test_fit_transform_not_in (test_one_hot_encoder.TestFitTransform.test_fit_transform_not_in) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+
+
+
+python -m pytest -v pytest_fit_transform.py
+
+================================================================================= test session starts =================================================================================
+platform win32 -- Python 3.11.4, pytest-7.4.0, pluggy-1.0.0 -- C:\Users\aleks\anaconda3\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\aleks\Desktop\omd
+plugins: anyio-3.5.0, cov-4.1.0
+collected 4 items
+
+pytest_fit_transform.py::test_fit_transform_raise PASSED                                                                                                                         [ 25%]
+pytest_fit_transform.py::test_fit_transform_equal PASSED                                                                                                                         [ 50%]
+pytest_fit_transform.py::test_fit_transform_in PASSED                                                                                                                            [ 75%]
+pytest_fit_transform.py::test_fit_transform_not_in PASSED                                                                                                                        [100%]
+
+================================================================================== 4 passed in 0.02s ==================================================================================
+
+
+
+python -m pytest -v test_year.py
+
+================================================================================= test session starts =================================================================================
+platform win32 -- Python 3.11.4, pytest-7.4.0, pluggy-1.0.0 -- C:\Users\aleks\anaconda3\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\aleks\Desktop\omd
+plugins: anyio-3.5.0, cov-4.1.0
+collected 3 items
+
+test_year.py::test_ymd PASSED                                                                                                                                                    [ 33%]
+test_year.py::test_dmy PASSED                                                                                                                                                    [ 66%]
+test_year.py::test_raise PASSED                                                                                                                                                  [100%]
+
+================================================================================== 3 passed in 0.02s ==================================================================================
