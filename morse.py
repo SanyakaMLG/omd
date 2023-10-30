@@ -67,10 +67,3 @@ def decode(morse_message: str) -> str:
 )
 def test_decode_message(morse_msg, msg):
     assert decode(morse_msg) == msg
-
-
-if __name__ == '__main__':
-    morse_msg = '-- .- .. -....- .--. -.-- - .... --- -. -....- ..--- ----- .---- ----.'
-    decoded_msg = decode(morse_msg)
-    print(decoded_msg)
-    assert morse_msg == encode(decoded_msg)
