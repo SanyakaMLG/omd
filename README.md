@@ -17,3 +17,7 @@
 # issue-05
 
 Для запуска: ```python -m pytest -v test_year.py --cov=what_is_year_now --cov-report html```
+
+# Coverage for issue-05:
+
+![](image/coverage.jpg)
