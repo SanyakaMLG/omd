@@ -1,29 +1,32 @@
 import sys
 from datetime import datetime
+from typing import Callable
 
 original_write = sys.stdout.write
 
 
 # task1
-def my_write(string_text: str) -> None:
-    if string_text != "\n":
-        timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]: ")
-        modified_text = timestamp + string_text
-    else:
-        modified_text = string_text
-    original_write(modified_text)
+def my_write(s: str) -> int:
+    if s == '\n':
+        original_write(s)
+        return 0
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    text_with_timestamp = f'[{timestamp}]: {s}'
+    original_write(text_with_timestamp)
+    return sys.getsizeof(text_with_timestamp)
 
 
 # task2
-def timed_output(function):
+def timed_output(function: Callable) -> Callable:
     def wrapper(*args, **kwargs):
-        def my_write(string_text):
+        def my_write(string_text: str) -> int:
             if string_text == '\n':
                 original_write(string_text)
-                return
+                return 0
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             text_with_timestamp = f'[{timestamp}]: {string_text}'
             original_write(text_with_timestamp)
+            return sys.getsizeof(text_with_timestamp)
 
         sys.stdout.write = my_write
         res = function(*args, **kwargs)
@@ -34,13 +37,13 @@ def timed_output(function):
 
 
 @timed_output
-def print_greeting(name):
+def print_greeting(name: str):
     print(f'Hello, {name}!')
 
 
 # task3
-def redirect_output(filepath):
-    def decorator(func):
+def redirect_output(filepath: str) -> Callable:
+    def decorator(func: Callable) -> Callable:
         def wrapper(*args, **kwargs):
             original = sys.stdout
             with open(filepath, 'w') as output:
@@ -53,7 +56,7 @@ def redirect_output(filepath):
 
 
 @redirect_output('function_output.txt')
-def calculate():
+def calculate() -> None:
     for power in range(1, 5):
         for num in range(1, 20):
             print(num ** power, end=' ')
