@@ -26,8 +26,9 @@ def timed_output(function):
             original_write(text_with_timestamp)
 
         sys.stdout.write = my_write
-        function(*args, **kwargs)
+        res = function(*args, **kwargs)
         sys.stdout.write = original_write
+        return res
 
     return wrapper
 
