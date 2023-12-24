@@ -1,6 +1,5 @@
 import abc
 import asyncio
-from concurrent.futures import ProcessPoolExecutor
 
 
 class AbstractModel:
@@ -21,10 +20,4 @@ class Handler:
         # отличается от времени исполнения нескольких таких корутин, запущенных конкурентно.
         #
         # YOU CODE GOES HERE
-        with ProcessPoolExecutor(max_workers=10) as executor:
-            task = asyncio.create_task(self.process_task(executor))
-            await task
-
-    async def process_task(self, executor: ProcessPoolExecutor):
-        loop = asyncio.get_event_loop()
-        loop.run_in_executor(executor, self._model.compute())
+        await asyncio.to_thread(self._model.compute)
